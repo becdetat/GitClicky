@@ -50,6 +50,7 @@
     <Compile Include="NotInGitRepositoryException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryHasNoRemotesException.cs" />
+    <Compile Include="UnknownRemoteProviderException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

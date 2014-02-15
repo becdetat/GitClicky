@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using GitClicky.Core.Extensions;
 using LibGit2Sharp;
 
 namespace GitClicky.Core
@@ -17,7 +18,29 @@ namespace GitClicky.Core
 
             var remote = GetRemote(repositoryPath, "origin", "upstream");
 
-            return remote;
+            if (remote.Contains("github.com:"))
+            {
+                return GetRawPathForGithub(path, repositoryPath, remote);
+            }
+
+            throw new UnknownRemoteProviderException(remote);
+        }
+
+        private static string GetRawPathForGithub(string path, string repositoryPath, string remote)
+        {
+            var remotePath = remote
+                .Replace("git@github.com:", "")
+                .Replace(".git", "");
+
+            var filePath = path
+                .Replace(repositoryPath + "\\", "")
+                .Replace("\\", "/");
+
+            return "https://github.com/{remotePath}/raw/master/{filePath}".FormatWith(new
+            {
+                remotePath,
+                filePath
+            });
         }
 
         private static string GetRemote(string repositoryPath, params string[] preferredRemoteNames)
