@@ -49,6 +49,7 @@
     <Compile Include="IGitRepositoryService.cs" />
     <Compile Include="NotInGitRepositoryException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryHasNoRemotesException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
