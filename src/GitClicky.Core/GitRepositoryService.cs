@@ -23,24 +23,48 @@ namespace GitClicky.Core
                 return GetRawPathForGithub(path, repositoryPath, remote);
             }
 
+            if (remote.Contains("bitbucket.org:"))
+            {
+                return GetRawPathForBitBucket(path, repositoryPath, remote);
+            }
+
             throw new UnknownRemoteProviderException(remote);
         }
 
         private static string GetRawPathForGithub(string path, string repositoryPath, string remote)
         {
-            var remotePath = remote
-                .Replace("git@github.com:", "")
-                .Replace(".git", "");
-
-            var filePath = path
-                .Replace(repositoryPath + "\\", "")
-                .Replace("\\", "/");
-
             return "https://github.com/{remotePath}/raw/master/{filePath}".FormatWith(new
             {
-                remotePath,
-                filePath
+                remotePath = GetRemotePath(remote, "git@github.com"),
+                filePath = GetFilePath(path,repositoryPath)
             });
+        }
+
+        private static string GetRawPathForBitBucket(string path, string repositoryPath, string remote)
+        {
+            // git@bitbucket.org:centium-ondemand/nextgen.git 
+            //https://bitbucket.org/centium-ondemand/nextgen/raw/master/NextGen.Client/App.config
+
+            return "https://bitbucket.org/{remotePath}/raw/master/{filePath}".FormatWith(new
+            {
+                remotePath = GetRemotePath(remote, "git@bitbucket.org"),
+                filePath = GetFilePath(path, repositoryPath)
+            });
+
+        }
+
+        private static string GetRemotePath(string remote, string providerPrefix)
+        {
+            return remote
+                .Replace("{0}:".FormatWith(providerPrefix), "")
+                .Replace(".git", "");
+        }
+
+        private static string GetFilePath(string path, string repositoryPath)
+        {
+            return path
+                .Replace(repositoryPath + "\\", "")
+                .Replace("\\", "/");
         }
 
         private static string GetRemote(string repositoryPath, params string[] preferredRemoteNames)

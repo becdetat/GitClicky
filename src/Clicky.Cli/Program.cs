@@ -26,6 +26,14 @@ namespace Clicky.Cli
             {
                 Console.WriteLine("The specified path does not exist within a Git repository");
             }
+            catch (RepositoryHasNoRemotesException)
+            {
+                Console.WriteLine("The repository doesn't have any remotes configured");
+            }
+            catch (UnknownRemoteProviderException e)
+            {
+                Console.WriteLine("The repository's remote provider is unknown: {0}".FormatWith(e.Message));
+            }
         }
     }
 }
