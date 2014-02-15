@@ -12,9 +12,12 @@ namespace GitClicky.Core
         public string GetFetchRemoteForPath(string path)
         {
             var repositoryPath = GetRepositoryPath(path);
-            return repositoryPath;
-            //var repository = new Repository(repositoryPath);
-            //var remote = new Remote(handle, repository);
+
+            using (var repository = new Repository(repositoryPath))
+            {
+                return repository.Network.Remotes["origin"].Url;
+            }
+
         }
 
         static string GetRepositoryPath(string path)
