@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GitClicky.Core;
 using GitClicky.Core.Extensions;
 
 namespace Clicky.Cli
@@ -11,7 +12,20 @@ namespace Clicky.Cli
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Input: {0}".FormatWith(args[0]));
+            IGitRepositoryService gitRepositoryService = new GitRepositoryService();
+
+            var inputPath = args[0];
+
+            Console.WriteLine("Input: {0}".FormatWith(inputPath));
+
+            try
+            {
+                Console.WriteLine("Fetch path: {0}".FormatWith(gitRepositoryService.GetFetchRemoteForPath(inputPath)));
+            }
+            catch (NotInGitRepositoryException)
+            {
+                Console.WriteLine("The specified path does not exist within a Git repository");
+            }
         }
     }
 }
