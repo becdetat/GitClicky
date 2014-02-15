@@ -12,20 +12,41 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CF8570
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitClicky.Extension", "GitClicky.Extension\GitClicky.Extension.csproj", "{F817FD62-E354-403E-BCF0-A9BFE1ABEDC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibGit2Sharp", "libgit2sharp\LibGit2Sharp\LibGit2Sharp.csproj", "{EE6ED99F-CB12-4683-B055-D28FC7357A34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Leaks|Any CPU = Leaks|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8192D127-8C41-43E9-B066-8922EF8CB6A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8192D127-8C41-43E9-B066-8922EF8CB6A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8192D127-8C41-43E9-B066-8922EF8CB6A9}.Leaks|Any CPU.ActiveCfg = Release|Any CPU
+		{8192D127-8C41-43E9-B066-8922EF8CB6A9}.Leaks|Any CPU.Build.0 = Release|Any CPU
 		{8192D127-8C41-43E9-B066-8922EF8CB6A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8192D127-8C41-43E9-B066-8922EF8CB6A9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A14330F2-C16F-47A1-B0CB-4AA0B4B52F7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A14330F2-C16F-47A1-B0CB-4AA0B4B52F7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14330F2-C16F-47A1-B0CB-4AA0B4B52F7E}.Leaks|Any CPU.ActiveCfg = Release|Any CPU
+		{A14330F2-C16F-47A1-B0CB-4AA0B4B52F7E}.Leaks|Any CPU.Build.0 = Release|Any CPU
 		{A14330F2-C16F-47A1-B0CB-4AA0B4B52F7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A14330F2-C16F-47A1-B0CB-4AA0B4B52F7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F817FD62-E354-403E-BCF0-A9BFE1ABEDC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F817FD62-E354-403E-BCF0-A9BFE1ABEDC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F817FD62-E354-403E-BCF0-A9BFE1ABEDC0}.Leaks|Any CPU.ActiveCfg = Release|Any CPU
+		{F817FD62-E354-403E-BCF0-A9BFE1ABEDC0}.Leaks|Any CPU.Build.0 = Release|Any CPU
+		{F817FD62-E354-403E-BCF0-A9BFE1ABEDC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F817FD62-E354-403E-BCF0-A9BFE1ABEDC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE6ED99F-CB12-4683-B055-D28FC7357A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE6ED99F-CB12-4683-B055-D28FC7357A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE6ED99F-CB12-4683-B055-D28FC7357A34}.Leaks|Any CPU.ActiveCfg = Leaks|Any CPU
+		{EE6ED99F-CB12-4683-B055-D28FC7357A34}.Leaks|Any CPU.Build.0 = Leaks|Any CPU
+		{EE6ED99F-CB12-4683-B055-D28FC7357A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE6ED99F-CB12-4683-B055-D28FC7357A34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

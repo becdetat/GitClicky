@@ -12,20 +12,57 @@ namespace GitClicky.Core
 {
     public class GitRepositoryService : IGitRepositoryService
     {
+        private readonly string[] _preferredRemoteNames =
+        {
+            "origin", 
+            "upstream"
+        };
+
         public string GetFetchRemoteForPath(string path)
         {
             var repositoryPath = GetRepositoryPath(path);
 
-            var remote = GetRemote(repositoryPath, "origin", "upstream");
+            var remote = GetRemote(repositoryPath, _preferredRemoteNames);
+            var provider = GetProviderForRemote(remote);
 
-            if (remote.Contains("github.com:"))
+            switch (provider)
             {
-                return GetRawPathForGithub(path, repositoryPath, remote);
+                case GitRemoteProvider.BitBucket:
+                    return GetRawPathForBitBucket(path, repositoryPath, remote);
+                case GitRemoteProvider.Github:
+                    return GetRawPathForGithub(path, repositoryPath, remote);
             }
 
-            if (remote.Contains("bitbucket.org:"))
+            throw new ProviderNotImplementedException(provider);
+        }
+
+        public bool IsPathInRepository(string path)
+        {
+            try
             {
-                return GetRawPathForBitBucket(path, repositoryPath, remote);
+                GetRepositoryPath(path);
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public GitRemoteProvider GetProviderForRemote(string remote)
+        {
+            var providerMap = new Dictionary<GitRemoteProvider, string>
+            {
+                { GitRemoteProvider.Github, "github.com:" },
+                { GitRemoteProvider.BitBucket, "bitbucket.org:" }
+            };
+
+            var matchingProviders = providerMap.Where(x => remote.Contains(x.Value)).Select(x => x.Key);
+
+            if (matchingProviders.Any())
+            {
+                return matchingProviders.FirstOrDefault();
             }
 
             throw new UnknownRemoteProviderException(remote);
@@ -42,9 +79,6 @@ namespace GitClicky.Core
 
         private static string GetRawPathForBitBucket(string path, string repositoryPath, string remote)
         {
-            // git@bitbucket.org:centium-ondemand/nextgen.git 
-            //https://bitbucket.org/centium-ondemand/nextgen/raw/master/NextGen.Client/App.config
-
             return "https://bitbucket.org/{remotePath}/raw/master/{filePath}".FormatWith(new
             {
                 remotePath = GetRemotePath(remote, "git@bitbucket.org"),

@@ -10,6 +10,11 @@ namespace GitClicky.Core.Extensions
 {
     public static class StringExtensions
     {
+        public static string Join(this IEnumerable<string> value, string seperator)
+        {
+            return string.Join(seperator, value);
+        }
+
         public static string FormatWith(this string format, params object[] args)
         {
             args = args ?? new object[0];

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8192D127-8C41-43E9-B066-8922EF8CB6A9}</ProjectGuid>
+    <ProjectGuid>{F817FD62-E354-403E-BCF0-A9BFE1ABEDC0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GitClicky.Core</RootNamespace>
-    <AssemblyName>GitClicky.Core</AssemblyName>
+    <RootNamespace>GitClicky.Extension</RootNamespace>
+    <AssemblyName>GitClicky.Extension</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -38,8 +38,13 @@
     <AssemblyOriginatorKeyFile>GitClickyKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SharpShell">
+      <HintPath>..\packages\SharpShell.2.0\lib\SharpShell.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,35 +52,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="GitRemoteProvider.cs" />
-    <Compile Include="GitRepositoryService.cs" />
-    <Compile Include="IGitRepositoryService.cs" />
-    <Compile Include="NotInGitRepositoryException.cs" />
+    <Compile Include="GitClickyExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProviderNotImplementedException.cs" />
-    <Compile Include="RepositoryHasNoRemotesException.cs" />
-    <Compile Include="UnknownRemoteProviderException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GitClickyKey.snk" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="git2-65e9dc6.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\libgit2sharp\LibGit2Sharp\LibGit2Sharp.csproj">
-      <Project>{ee6ed99f-cb12-4683-b055-d28fc7357a34}</Project>
-      <Name>LibGit2Sharp</Name>
+    <ProjectReference Include="..\GitClicky.Core\GitClicky.Core.csproj">
+      <Project>{8192D127-8C41-43E9-B066-8922EF8CB6A9}</Project>
+      <Name>GitClicky.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
