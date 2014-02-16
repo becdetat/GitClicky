@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -61,7 +62,12 @@
     <None Include="GitClickyKey.snk" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="git2-65e9dc6.dll">
+    <Content Include="..\libgit2sharp\Lib\NativeBinaries\amd64\git2-65e9dc6.dll">
+      <Link>git2-65e9dc6.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\libgit2sharp\Lib\NativeBinaries\amd64\git2-65e9dc6.pdb">
+      <Link>git2-65e9dc6.pdb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -72,6 +78,9 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <NativeBinariesDirectory>$(MSBuildProjectDirectory)\..\libgit2sharp\Lib\NativeBinaries</NativeBinariesDirectory>
+  </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>

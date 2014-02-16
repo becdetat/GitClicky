@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -32,27 +33,74 @@ namespace GitClicky.Extension
 
         protected override ContextMenuStrip CreateMenu()
         {
-            var provider = !SelectedItemPaths.Any()
-                ? "Git provider"
-                : _gitRepositoryService.GetProviderForRemote(SelectedItemPaths.First()).ToString();
+            var menu = new ContextMenuStrip();
 
-            var getRawGitUrlMenuItem = new ToolStripMenuItem()
+            if (!SelectedItemPaths.Any())
             {
-                Text = "Get {0} URL".FormatWith(provider)
-            };
+                return menu;
+            }
 
-            getRawGitUrlMenuItem.Click += (sender, args) =>
+            try
+            {
+                string providerName;
+                try
+                {
+                    var repositoryPath = _gitRepositoryService.GetRepositoryPath(SelectedItemPaths.First());
+                    var remote = _gitRepositoryService.GetRemote(repositoryPath);
+                    var provider = _gitRepositoryService.GetProviderForRemote(remote);
+                    providerName = provider.ToString();
+                }
+                catch (Exception ex)
+                {
+                    return menu;
+                }
+
+                var getRawGitUrlMenuItem = new ToolStripMenuItem
+                {
+                    Text = "Copy {0} repository raw URL".FormatWith(providerName)
+                };
+
+                getRawGitUrlMenuItem.Click += (sender, args) => ExecuteGitClicky();
+
+                menu.Items.Add(getRawGitUrlMenuItem);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            return menu;
+        }
+
+        private void ExecuteGitClicky()
+        {
+            string error = null;
+
+            try
             {
                 var urls = SelectedItemPaths
                     .Select(x => _gitRepositoryService.GetFetchRemoteForPath(x))
                     .Join(Environment.NewLine);
                 Clipboard.SetText(urls);
-            };
+                MessageBox.Show(urls);
+            }
+            catch (NotInGitRepositoryException)
+            {
+                error = "The specified path does not exist within a Git repository";
+            }
+            catch (RepositoryHasNoRemotesException)
+            {
+                error = "The repository doesn't have any remotes configured";
+            }
+            catch (UnknownRemoteProviderException e)
+            {
+                error = "The repository's remote provider is unknown: {0}".FormatWith(e.Message);
+            }
 
-            var menu = new ContextMenuStrip();
-            menu.Items.Add(getRawGitUrlMenuItem);
-
-            return menu;
+            if (!string.IsNullOrEmpty(error))
+            {
+                MessageBox.Show(error, "GitClicky", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

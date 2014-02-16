@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,8 +39,18 @@
     <AssemblyOriginatorKeyFile>GitClickyKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SharpShell">
-      <HintPath>..\packages\SharpShell.2.0\lib\SharpShell.dll</HintPath>
+    <Reference Include="Apex.WinForms">
+      <HintPath>..\packages\SharpShellTools.2.0.0\lib\Apex.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ServerManager">
+      <HintPath>..\packages\SharpShellTools.2.0.0\lib\ServerManager.exe</HintPath>
+    </Reference>
+    <Reference Include="SharpShell, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f14dc899472fe6fb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SharpShellTools.2.0.0\lib\SharpShell.dll</HintPath>
+    </Reference>
+    <Reference Include="srm">
+      <HintPath>..\packages\SharpShellTools.2.0.0\lib\srm.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -50,6 +50,19 @@ namespace GitClicky.Core
             return true;
         }
 
+        public bool HasProviderForRemote(string remote)
+        {
+            try
+            {
+                GetProviderForRemote(remote);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
         public GitRemoteProvider GetProviderForRemote(string remote)
         {
             var providerMap = new Dictionary<GitRemoteProvider, string>
@@ -58,7 +71,10 @@ namespace GitClicky.Core
                 { GitRemoteProvider.BitBucket, "bitbucket.org:" }
             };
 
-            var matchingProviders = providerMap.Where(x => remote.Contains(x.Value)).Select(x => x.Key);
+            var matchingProviders = providerMap
+                .Where(x => remote.Contains(x.Value))
+                .Select(x => x.Key)
+                .ToList();
 
             if (matchingProviders.Any())
             {
@@ -66,6 +82,19 @@ namespace GitClicky.Core
             }
 
             throw new UnknownRemoteProviderException(remote);
+        }
+
+        public string GetRepositoryPath(string path)
+        {
+            while (!Directory.Exists(Path.Combine(path, ".git")))
+            {
+                path = Path.GetDirectoryName(path);
+                if (path == Path.GetPathRoot(path))
+                {
+                    throw new NotInGitRepositoryException();
+                }
+            }
+            return path;
         }
 
         private static string GetRawPathForGithub(string path, string repositoryPath, string remote)
@@ -84,7 +113,6 @@ namespace GitClicky.Core
                 remotePath = GetRemotePath(remote, "git@bitbucket.org"),
                 filePath = GetFilePath(path, repositoryPath)
             });
-
         }
 
         private static string GetRemotePath(string remote, string providerPrefix)
@@ -101,7 +129,7 @@ namespace GitClicky.Core
                 .Replace("\\", "/");
         }
 
-        private static string GetRemote(string repositoryPath, params string[] preferredRemoteNames)
+        public string GetRemote(string repositoryPath, params string[] preferredRemoteNames)
         {
             using (var repository = new Repository(repositoryPath))
             {
@@ -132,19 +160,6 @@ namespace GitClicky.Core
             {
                 yield return remote;
             }
-        }
-
-        private static string GetRepositoryPath(string path)
-        {
-            while (!Directory.Exists(Path.Combine(path, ".git")))
-            {
-                path = Path.GetDirectoryName(path);
-                if (path == Path.GetPathRoot(path))
-                {
-                    throw new NotInGitRepositoryException();
-                }
-            }
-            return path;
         }
     }
 }
