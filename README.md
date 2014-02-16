@@ -9,7 +9,7 @@ Context menu helper for getting public urls to files from GitHub and Bitbucket
 ## Usage
 
 
-- Installation binaries are available [here](todo)
+- Download the [latest version](https://github.com/bendetat/GitClicky/releases/latest) or find [older releases here](https://github.com/bendetat/GitClicky/releases)
 - Installation requires elevated privileges and you may need to [manually restart Windows Explorer](https://www.google.com.au/search?q=restart+windows+explorer)
 	- The installation script attempts to restart Explorer but it isn't perfect
 - Inside a repository with a remote hosted by BitBucket or GitHub, right click a file and select "Copy {GitHub/Bitbucket} repository raw URL"
