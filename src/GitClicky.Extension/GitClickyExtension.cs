@@ -82,7 +82,6 @@ namespace GitClicky.Extension
                     .Select(x => _gitRepositoryService.GetFetchRemoteForPath(x))
                     .Join(Environment.NewLine);
                 Clipboard.SetText(urls);
-                MessageBox.Show(urls);
             }
             catch (NotInGitRepositoryException)
             {
