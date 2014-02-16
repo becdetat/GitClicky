@@ -1,7 +1,7 @@
 GitClicky
 ========
 
-Context menu helper for getting public urls to files from GitHub and Bitbucket
+Windows Explorer context menu extension to get the raw URL for a file contained in a Git repository on GitHub or BitBucket.
 
 
 ## Usage
