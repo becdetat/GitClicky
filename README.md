@@ -1,3 +1,5 @@
+<img align="right" src="http://snag.gy/y9VrV.jpg" alt="Screenshot of GitClicky's addition to the context menu"/>
+
 GitClicky
 ========
 
@@ -6,7 +8,6 @@ Context menu helper for getting public urls to files from GitHub and Bitbucket
 
 ## Usage
 
-<img style="align: right" src="http://snag.gy/y9VrV.jpg" alt="Screenshot of GitClicky's addition to the context menu"/>
 
 - Installation binaries are available [here](todo)
 - Installation requires elevated privileges and you may need to [manually restart Windows Explorer](https://www.google.com.au/search?q=restart+windows+explorer)
@@ -23,7 +24,7 @@ The remote is identified by finding the first remote hosted on GitHub or Bitbuck
 
 - Windows Explorer doesn't correctly restart on installation
 - The extension may not correctly uninstall, workaround is (hopefully):
-	- opening a console as administrator
+	- open a console as administrator
 	- navigate to `%userprofile%\AppData\Local\bendetat\GitClicky\{version}`
 	- execute `srm.exe uninstall GitClicky.Extension.dll -codebase`
 	- restart Explorer manually
@@ -46,6 +47,12 @@ The remote is identified by finding the first remote hosted on GitHub or Bitbuck
 ## Contributing
 
 If you would like to contribute to this project then feel free to send a pull request or submit an issue. Communicate with me via Twitter at [@bendetat](http://twitter.com/bendetat).
+
+
+## Version history
+
+### 0.1.0
+- Initial version
 
 
 ## Third party libraries and tools
