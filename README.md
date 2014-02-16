@@ -51,7 +51,7 @@ If you would like to contribute to this project then feel free to send a pull re
 
 ## Version history
 
-### 0.1.0
+### [0.1.0](https://github.com/bendetat/GitClicky/releases/tag/0.1.0)
 - Initial version
 
 
