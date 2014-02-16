@@ -1,5 +1,3 @@
-<img align="right" src="http://snag.gy/y9VrV.jpg" alt="Screenshot of GitClicky's addition to the context menu"/>
-
 GitClicky
 ========
 
@@ -8,6 +6,8 @@ Context menu helper for getting public urls to files from GitHub and Bitbucket
 
 ## Usage
 
+
+<img align="right" src="http://snag.gy/y9VrV.jpg" alt="Screenshot of GitClicky's addition to the context menu"/>
 
 - Download the [latest version](https://github.com/bendetat/GitClicky/releases/latest) or find [older releases here](https://github.com/bendetat/GitClicky/releases)
 - Installation requires elevated privileges and you may need to [manually restart Windows Explorer](https://www.google.com.au/search?q=restart+windows+explorer)
